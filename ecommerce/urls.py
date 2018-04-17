@@ -26,7 +26,7 @@ product_resource = ProductResource()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('commerce/', include(user_resource.urls)),
-    path('commerce/', include(cart_resource.urls)),
-    path('commerce/', include(product_resource.urls)),
+    path('api/', include(user_resource.urls)),
+    path('api/', include(cart_resource.urls)),
+    path('api/', include(product_resource.urls)),
 ]

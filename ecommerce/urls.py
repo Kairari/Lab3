@@ -19,6 +19,13 @@ from django.conf.urls import url, include
 from commerce.resources import UserResource
 from commerce.resources import CartResource
 from commerce.resources import ProductResource
+from rest_framework_jwt.views import refresh_jwt_token
+from rest_framework.schemas import get_schema_view
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 user_resource = UserResource()
 cart_resource = CartResource()
@@ -29,4 +36,9 @@ urlpatterns = [
     path('api/', include(user_resource.urls)),
     path('api/', include(cart_resource.urls)),
     path('api/', include(product_resource.urls)),
+    url(r'^api/$', get_schema_view()),
+    url(r'^api/auth/', include(
+        'rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
+    url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
 ]
